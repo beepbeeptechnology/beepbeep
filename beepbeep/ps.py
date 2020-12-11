@@ -39,7 +39,7 @@ def publish_message_to_pubsub_topic_with_text_payload(topic_name:str, text_paylo
     return message_status
 
 
-def build_pubsub_event_payload(text_payload: str, attribute_dict: dict) -> dict:
+def build_pubsub_event_payload(text_payload: str, attribute_dict: dict=None) -> dict:
 
     try:
         # base64 encode text payload
