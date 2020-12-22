@@ -1,10 +1,10 @@
 # beepbeep.fb: facebook graph api functions
-from typing import Callable, Any, Dict, List
+from typing import Any, Dict, List, Union
 import requests
 from datetime import datetime
 
 
-def debug_access_token(access_token: str) -> dict:
+def debug_access_token(access_token: str) -> Union[dict, Any]:
     """
     Request API Endpoint: https://graph.facebook.com/debug_token?input_token={input-token}&access_token={valid-access-token}.
     
@@ -70,7 +70,7 @@ def get_token_expiry_dates(debug_response: dict) -> dict:
     return token_dates
 
 
-def exchange_token(api_version: str, client_id: str, client_secret: str, access_token: str) -> dict:
+def exchange_token(api_version: str, client_id: str, client_secret: str, access_token: str) -> Union[dict, Any]:
     """
     Function to exchange short live token.
 
@@ -114,7 +114,7 @@ def get_valid_insights_metrics(media_type: str) -> list:
     return valid_metrics
 
 
-def get_media_objects(api_version: str, ig_user_id: str, fields_list: list, access_token: str) -> dict:
+def get_media_objects(api_version: str, ig_user_id: str, fields_list: list, access_token: str) -> Union[dict, Any]:
     """
     This function makes a request to the API Endpoint:
         https://graph.facebook.com/{graph-api-version}/{ig-user-id}/media?fields={fields}&access_token={access-token}
@@ -146,7 +146,7 @@ def get_media_objects(api_version: str, ig_user_id: str, fields_list: list, acce
     return response.json()
 
 
-def get_media_insights (api_version: str, ig_media_id: str, metrics_list: list, access_token: str) -> dict:
+def get_media_insights (api_version: str, ig_media_id: str, metrics_list: list, access_token: str) -> Union[dict, Any]:
     """
     This function makes a request to the API Endpoint:
         https://graph.facebook.com/v9.0/{ig-media-id}/insights?metric={metrics}&access_token={access-token}
@@ -177,7 +177,14 @@ def get_media_insights (api_version: str, ig_media_id: str, metrics_list: list, 
     return response.json()
 
 
-def get_user_insights (api_version: str, ig_user_id: str, metrics_list: list, period: str, since: str, until: str, access_token: str) -> dict:
+def get_user_insights (
+        api_version: str, 
+        ig_user_id: str, 
+        metrics_list: list, 
+        period: str, 
+        since: str, 
+        until: str, 
+        access_token: str) -> Union[dict, Any]:
     """
     This function makes a request to the API Endpoint:
         https://graph.facebook.com/v9.0/{ig-user-id}/insights?metric={metric}&period={period}&since={since}&until={until}&access_token={access-token}
@@ -213,46 +220,46 @@ def get_user_insights (api_version: str, ig_user_id: str, metrics_list: list, pe
 
 
 if __name__ == '__main__':
-    def type_hint_test():
-        # *********************** TYPE HINT *************************
-        result_debug_access_token = debug_access_token("EAAKBaHr9LcEBAGv2hKfqlc34Kpp3joWP7SnJgyRmU0F9gxifdJ9mmWeZCuQ1pwbmeAZBbSEF0yBCmcJK1MZAKBMzGSsTgCsv67rmCa3deKaVd4FBCqtGE5RrBP22GlKb6ZAPnTESqeZAofBEGZCvEIl6qZBrZBvDvFHlM5BIyaQUWTQF7VVq1dVZCnBjLwtBMD5JTgvyZBBOclxZAxcjfqjWnuE")
-        print(type(result_debug_access_token))
+    #def type_hint_test():
+    # *********************** TYPE HINT *************************
+    result_debug_access_token = debug_access_token("EAAKBaHr9LcEBAGv2hKfqlc34Kpp3joWP7SnJgyRmU0F9gxifdJ9mmWeZCuQ1pwbmeAZBbSEF0yBCmcJK1MZAKBMzGSsTgCsv67rmCa3deKaVd4FBCqtGE5RrBP22GlKb6ZAPnTESqeZAofBEGZCvEIl6qZBrZBvDvFHlM5BIyaQUWTQF7VVq1dVZCnBjLwtBMD5JTgvyZBBOclxZAxcjfqjWnuE")
+    print(type(result_debug_access_token))
 
-        result_get_token_expiry_dates = get_token_expiry_dates(result_debug_access_token)
-        print(type(result_get_token_expiry_dates))
-        print(result_get_token_expiry_dates)
+    result_get_token_expiry_dates = get_token_expiry_dates(result_debug_access_token)
+    print(type(result_get_token_expiry_dates))
+    print(result_get_token_expiry_dates)
 
-        result_exchange_token = exchange_token('api_version', 'client_id', 'client_secret', 'access_token')
-        print(type(result_exchange_token))
-        print(result_exchange_token)
+    result_exchange_token = exchange_token('api_version', 'client_id', 'client_secret', 'access_token')
+    print(type(result_exchange_token))
+    print(result_exchange_token)
 
-        media_type_list = ['IMAGE', 'VIDEO', 'CAROUSEL_ALBUM', 'STORY']
-        result_get_valid_insights_metrics = get_valid_insights_metrics(media_type_list[1])
-        print(type(result_get_valid_insights_metrics))
-        print(result_get_valid_insights_metrics)
+    media_type_list = ['IMAGE', 'VIDEO', 'CAROUSEL_ALBUM', 'STORY']
+    result_get_valid_insights_metrics = get_valid_insights_metrics(media_type_list[1])
+    print(type(result_get_valid_insights_metrics))
+    print(result_get_valid_insights_metrics)
 
-        get_media_objects_list = ['IMAGE', 'VIDEO', 'CAROUSEL_ALBUM', 'STORY']
-        result_get_media_objects = get_media_objects('api_version', 'ig_user_id', get_media_objects_list, 'access_token')
-        print(type(result_get_media_objects))
-        print(result_get_media_objects)
+    get_media_objects_list = ['IMAGE', 'VIDEO', 'CAROUSEL_ALBUM', 'STORY']
+    result_get_media_objects = get_media_objects('api_version', 'ig_user_id', get_media_objects_list, 'access_token')
+    print(type(result_get_media_objects))
+    print(result_get_media_objects)
         
-        get_media_insights_list = ['photo', 'video', 'story', 'album']
-        result_get_media_insights = get_media_insights('api_version', 'ig_media_id', get_media_insights_list, 'access_token')
-        print(type(result_get_media_insights))
-        print(result_get_media_insights)
+    get_media_insights_list = ['photo', 'video', 'story', 'album']
+    result_get_media_insights = get_media_insights('api_version', 'ig_media_id', get_media_insights_list, 'access_token')
+    print(type(result_get_media_insights))
+    print(result_get_media_insights)
 
-        metrics_list = ['photo', 'video', 'story', 'album']
-        result_get_user_insights = get_user_insights('api_version', 'ig_user_id', metrics_list, 'period', 'since', 'until', 'access_token')
-        print(type(result_get_user_insights))
-        print(result_get_user_insights)
+    metrics_list = ['photo', 'video', 'story', 'album']
+    result_get_user_insights = get_user_insights('api_version', 'ig_user_id', metrics_list, 'period', 'since', 'until', 'access_token')
+    print(type(result_get_user_insights))
+    print(result_get_user_insights)
 
-        # **************************** Docstrings **************************
-        #print(debug_access_token.__doc__)
-        #print(get_token_expiry_dates.__doc__)
-        #print(exchange_token.__doc__)
-        #print(get_media_objects.__doc__)
-        #print(get_media_insights.__doc__)
-        print(get_user_insights.__doc__)
+    # **************************** Docstrings **************************
+    print(debug_access_token.__doc__)
+    print(get_token_expiry_dates.__doc__)
+    print(exchange_token.__doc__)
+    print(get_media_objects.__doc__)
+    print(get_media_insights.__doc__)
+    print(get_user_insights.__doc__)
 
         # mypy fb.py
     #type_hint_test()

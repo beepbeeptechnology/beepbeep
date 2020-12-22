@@ -1,5 +1,5 @@
 # beepbeep.bq: google bigquery functions
-
+from typing import Optional, Dict, Union, Any
 import os
 import json
 from datetime import datetime
@@ -36,6 +36,7 @@ def stream_json_into_bq_with_id(id_string: str, json_string: str, destination_re
             table, rows_to_insert, row_ids=[None] * len(rows_to_insert)
         )
 
+        stream_log: dict # Union[str, dict] 
         if len(errors) == 0:
             stream_log = {"status": "success", "message": None}
         else:
