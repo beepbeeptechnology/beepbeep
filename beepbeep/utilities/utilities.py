@@ -74,5 +74,5 @@ def open_json_from_local_path(
     
     return file_contents
 
-print(open_json_from_local_path('json_file_test.py', content={'a':1, 'b':2}, update_file=True))
+print(open_json_from_local_path('json_file_test.py', content={'a':1, 'b':5}, update_file=False))
 

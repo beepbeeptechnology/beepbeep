@@ -1,4 +1,4 @@
-from beepbeep.utilities import open_json_from_local_path
+from beepbeep.utilities.utilities import open_json_from_local_path
 
 import os
 import json
@@ -13,12 +13,12 @@ def test_open_json_from_local_path(tmpdir):
     json.dump(initial_content, open(filepath_name, 'w')) # Initial content
 
     update_file = False
-    update_content = {"a": 1, "b": 5}
+    update_content = {"a": 1, "b": 3}
     
-
-    if update_file is True: 
+    
+    if update_file is True:
         # Initial content should change by new update_content value. So update_content = update_content
-        assert update_content == open_json_from_local_path(filepath_name, content=update_content, update_file=update_file)
+        assert update_content == open_json_from_local_path(filepath_name, filesdir_name=tmpdir, content=update_content, update_file=update_file)
     else: 
         # Initial content restart default initial_content value above. 
         # So then update_content is not equal to initial_content.
