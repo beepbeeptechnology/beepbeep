@@ -1,0 +1,4 @@
+.mypy_cache
+env-beepbeep/
+.pytest_cache
+__pycache__/

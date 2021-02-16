@@ -1,10 +1,22 @@
 # beepbeep.sm: google secrets manager functions
+from typing import Union, Any
 
 import os
 from google.cloud import secretmanager
 
 
-def get_latest_secret_from_secret_manager(secret_name):
+def get_latest_secret_from_secret_manager(secret_name: str) -> Union[str, None, Any]:
+    """
+    Access the latest secret for the given secret name.
+
+    Parameters>
+        secret_name (str) : Secret name of the secret.
+    
+    Returns:
+        If exists, itreturns the secret value.
+        I not exists, it returns None
+    """
+
     try:
         # define parameters and instantiate client
         project_id = os.environ.get('GCP_PROJECT')
