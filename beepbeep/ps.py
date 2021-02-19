@@ -66,7 +66,7 @@ def publish_message_to_pubsub_topic_with_text_payload(topic_name:str, text_paylo
     return message_status
 
 
-def build_pubsub_event_payload(text_payload: str, attribute_dict: dict = None) -> Dict:
+def build_pubsub_event_payload(text_payload: str, attribute_dict: dict = None) -> dict:
     """
     Build a Pub/Sub event payload.
 
@@ -86,7 +86,7 @@ def build_pubsub_event_payload(text_payload: str, attribute_dict: dict = None) -
         text_payload_encoded: bytes = base64.b64encode(text_payload.encode("utf-8"))
 
         # construct event dict
-        event: dict
+        event = {}
         event['data'] = text_payload_encoded
         event['attributes'] = attribute_dict
     
